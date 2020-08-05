@@ -9,7 +9,7 @@ public class RollTheDice {
     static boolean diceShowedSixBefore;
     static boolean playerPickedSixBefore;
     static int counter;
-    static boolean gameLost;
+    static boolean yellowCard;
     static boolean continueGame = true;
     static String decision = "";
 
@@ -30,16 +30,18 @@ public class RollTheDice {
 
 //              First the cases are caught which handle the six in the game.
 
-                if (value == 6 && gameLost) {
+                if (value == 6 && yellowCard) {
                     System.out.println("You picked a six earlier in the game. You lost.");
                     break;
                 }
                 else if (value == 6 && !lastRound()) {
                     pickSix();
-                    if (decision.equals("y"))
+                    if (decision.equals("y")) {
                         playerPickedSixBefore = true;
-                    else if (counter == 12)
-                        System.out.println("You dummy, you missed it!");
+                    }
+//                  else if (counter == 12) {
+//                        System.out.println("You dummy, you missed it!");
+//                  }
                     diceShowedSixBefore = true;
                 }
                 else if (value == 6) {
@@ -77,7 +79,7 @@ public class RollTheDice {
     }
 
     public static void gameLogic() {
-        gameLost = diceShowedSixBefore && playerPickedSixBefore;
+        yellowCard = diceShowedSixBefore && playerPickedSixBefore;
     }
 
     public static void pickSix() {
